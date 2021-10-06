@@ -10,6 +10,40 @@
   </head>
 
   <body>
+    
+    <header>
+      <h3>Bookers</h3>
+      <% if user_signed_in? %>
+        <li>
+          Home
+        </li>
+        <li>
+          Users
+        </li>
+        <li>
+          Books
+        </li>
+        <li>
+          Log out
+        </li>
+      <% else %>
+        <li>
+          Home
+        </li>
+        <li>
+          About
+        </li>
+        <li>
+          Sign up
+        </li>
+        <li>
+          Log in
+        </li>
+      <% end %>
+    </header>
+    <main>
+      
+    </main>
     <%= yield %>
   </body>
 </html>
