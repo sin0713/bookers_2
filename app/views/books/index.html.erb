@@ -17,10 +17,24 @@
         </tbody>
       </table>
       <div class="row">
-
-        <a href="/users/<%= current_user.id %>/edit",
-           class="fas fa-user-cog btn btn-lg btn-block btn-outline-secondary"></a>
+        <a href="/users/<%= current_user.id %>/edit", class="fas fa-user-cog btn btn-lg btn-block btn-outline-secondary"></a>
       </div>
+
+      <h2 class="mb-2">New Book</h2>
+      <%= form_with model: @book, local:true do |f| %>
+        <div class="form-group">
+          <%= f.label :title, "Title" %>
+          <%= f.text_field :title, class:"form-control mb-2" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :opinion, "Opinion" %>
+          <%= f.text_area :opinion, rows:"3",  class:"form-control mb-2" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit "Create Book", class:"btn btn-success"%>
+        </div>
+      <% end %>
+
 
 
 
