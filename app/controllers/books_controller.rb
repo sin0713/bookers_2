@@ -1,4 +1,14 @@
 class BooksController < ApplicationController
+
+  before_action :ensure_current_user, {only: [:edit]}
+
+  def ensure_current_user
+    if current_user.id != params[:id].to_i
+      flash[:alert] = "You have no authority to access the page."
+      redirect_to books_path
+    end
+  end
+
   def index
     @books = Book.all
     @book = Book.new

@@ -1,4 +1,14 @@
 class UsersController < ApplicationController
+  before_action :ensure_current_user, {only: [:edit]}
+
+  def ensure_current_user
+    if current_user.id != params[:id].to_i
+      flash[:alert] = "You have no authority to access the page."
+      redirect_to user_path(current_user)
+    end
+  end
+
+
   def show
     @user = User.find(params[:id])
     @books = Book.where(user_id: @user.id) #もしくは @books = @user.books.all
@@ -17,7 +27,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user.id)
     else
       render :edit
-    end 
+    end
   end
 
 
