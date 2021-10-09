@@ -1,3 +1,5 @@
+<%= render 'layouts/error', model: @book %>
+
 <h2 class="mb-3">User info</h2>
   <%= attachment_image_tag current_user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
   <table class="table">
