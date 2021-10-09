@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container px-5 px-sm-0">
   <div class="row">
     <div class="col-md-3 mt-4">
-      <%= render 'layouts/error', model: @book %>
+      <%= render 'layouts/error', model: @new_book %>
 
       <h2 class="mb-3">User info</h2>
       <%= attachment_image_tag current_user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg" %>
@@ -19,7 +19,7 @@
         </tbody>
       </table>
       <div class="row">
-        <a href="/users/<%= current_user.id %>/edit", class="fas fa-user-cog btn btn-lg btn-block btn-outline-secondary"></a>
+        <a href="/users/<%= @user.id %>/edit", class="fas fa-user-cog btn btn-lg btn-block btn-outline-secondary"></a>
       </div>
 
       <%= render 'books/new_book', book: @new_book %>
@@ -46,12 +46,12 @@
              <td><%= @book.body %></td>
 
              <td>
-               <% if @user.id == @book.user.id %>
+               <% if current_user.id == @book.user_id %>
                  <%= link_to "Edit", edit_book_path(@book), class:"btn btn-success btn-sm" %>
                <% end %>
              </td>
              <td>
-               <% if @user.id == @book.user.id %>
+               <% if current_user.id == @book.user_id %>
                  <%= link_to "Destroy", book_path(@book), method: :delete, class:"btn btn-danger btn-sm", "data-confirm" => "本当に消しますか" %>
                <% end %>
              </td>

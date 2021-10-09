@@ -1,14 +1,5 @@
 class BooksController < ApplicationController
 
-  before_action :ensure_current_user, {only: [:edit]}
-
-  def ensure_current_user
-    if current_user.id != params[:id].to_i
-      flash[:alert] = "You have no authority to access the page."
-      redirect_to books_path
-    end
-  end
-
   def index
     @books = Book.all
     @book = Book.new
@@ -30,11 +21,15 @@ class BooksController < ApplicationController
     @new_book = Book.new
     @book = Book.find(params[:id])
 
-    @user = @book.user
+    @user = User.find(@book.user_id)
   end
 
   def edit
     @book = Book.find(params[:id])
+    if current_user.id != @book.user_id
+      flash[:alert] = "You have no authority to access the page."
+      redirect_to books_path
+    end
   end
 
   def update
@@ -63,6 +58,6 @@ class BooksController < ApplicationController
 
 
   def book_params
-    params.require(:book).permit(:title, :opinion)
+    params.require(:book).permit(:title, :body)
   end
 end

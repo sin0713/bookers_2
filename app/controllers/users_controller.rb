@@ -1,13 +1,5 @@
 class UsersController < ApplicationController
-  before_action :ensure_current_user, {only: [:edit]}
-
-  def ensure_current_user
-    if current_user.id != params[:id].to_i
-      flash[:alert] = "You have no authority to access the page."
-      redirect_to user_path(current_user)
-    end
-  end
-
+ 
 
   def show
     @user = User.find(params[:id])
@@ -18,6 +10,10 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    if current_user.id != @user.id
+      flash[:alert] = "You have no authority to access the page."
+      redirect_to user_path(current_user)
+    end 
   end
 
   def update
