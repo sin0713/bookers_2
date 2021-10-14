@@ -6,7 +6,9 @@
       <div class="col-md-2">
         <%= attachment_image_tag book_comment.user, :profile_image, :fill, 45, 45, fallback: "no_image.jpg", size:"45x45" %>
         <p>
-          <%= book_comment.user.name %>
+          <%= link_to user_path(book_comment.user.id) do %>
+            <%= book_comment.user.name %>
+          <% end %>
         </p>
       </div>
       <div class="col-md-5">
