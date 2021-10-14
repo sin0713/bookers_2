@@ -45,7 +45,7 @@
              </td>
              <td><%= @book.body %></td>
              <td>
-               <%= render 'favorite', book: @book %>
+               <%= render 'books/favorite', book: @book %>
              </td>
              <td>コメント数：<%= @book.book_comments.count %></td>
              <% if current_user.id == @book.user_id %>
@@ -59,8 +59,8 @@
            </tr>
          </tbody>
        </table>
-
-       <%= render 'comment', book: @book, book_comment: @book_comment, book_comments: @book.book_comments %>
+       <%= render 'layouts/error', model: @book_comment %>
+       <%= render 'books/comment', book: @book, book_comment: @book_comment, book_comments: @book.book_comments %>
      </div>
   </div>
 </div>
