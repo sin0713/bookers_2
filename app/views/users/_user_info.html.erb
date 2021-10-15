@@ -1,20 +1,28 @@
-<%= render 'layouts/error', model: @book %>
+
 
 <h2 class="mb-3">User info</h2>
-  <%= attachment_image_tag current_user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", size:"60x60" %>
+  <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", size:"60x60" %>
   <table class="table">
     <tbody>
       <tr></tr>
       <tr>
         <th>name</th>
-        <th><%= current_user.name %></th>
+        <th><%= user.name %></th>
       </tr>
       <tr>
         <th>introduction</th>
-        <th><%= current_user.introduction %></th>
+        <th><%= user.introduction %></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr>
+        <th></th>
+        <th></th>
       </tr>
     </tbody>
   </table>
   <div class="row">
-    <a href="/users/<%= current_user.id %>/edit", class="fas fa-user-cog btn  btn-block btn-outline-secondary"></a>
+    <a href="/users/<%= user.id %>/edit", class="fas fa-user-cog btn  btn-block btn-outline-secondary"></a>
   </div>

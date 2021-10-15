@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
- 
+
 
   def show
     @user = User.find(params[:id])
-    @books = Book.where(user_id: @user.id) #もしくは @books = @user.books.all
+    @books = Book.where(user_id: @user.id) #もしくは @books = @user.books なぜならテーブル同士アソシエーションで関連付けが行われているか
 
     @book = Book.new
   end
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     if current_user.id != @user.id
       flash[:alert] = "You have no authority to access the page."
       redirect_to user_path(current_user)
-    end 
+    end
   end
 
   def update

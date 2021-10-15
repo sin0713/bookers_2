@@ -2,25 +2,7 @@
   <div class="row">
     <div class="col-md-3 mt-4">
       <%= render 'layouts/error', model: @book %>
-
-      <h2 class="mb-3">User info</h2>
-        <%= attachment_image_tag current_user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", size:"60x60" %>
-        <table class="table">
-          <tbody>
-            <tr></tr>
-            <tr>
-              <th>name</th>
-              <th><%= @user.name %></th>
-            </tr>
-            <tr>
-              <th>introduction</th>
-              <th><%= @user.introduction %></th>
-            </tr>
-          </tbody>
-        </table>
-        <div class="row">
-          <a href="/users/<%= @user.id %>/edit", class="fas fa-user-cog btn  btn-block btn-outline-secondary"></a>
-        </div>
+      <%= render 'user_info', user: @user %>
       <%= render 'books/new_book', book: @new_book %>
     </div>
     <div class="col-md-8 offset-md-1 mt-4">
