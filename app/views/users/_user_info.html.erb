@@ -1,5 +1,3 @@
-
-
 <h2 class="mb-3">User info</h2>
   <%= attachment_image_tag user, :profile_image, :fill, 60, 60, fallback: "no_image.jpg", size:"60x60" %>
   <table class="table">
@@ -14,15 +12,27 @@
         <th><%= user.introduction %></th>
       </tr>
       <tr>
-        <th></th>
-        <th></th>
+        <th>follows</th>
+        <th>
+          <%= link_to user.followings.count, followings_user_path(user) %>
+        </th>
       </tr>
       <tr>
-        <th></th>
-        <th></th>
+        <th>followers</th>
+        <th>
+          <%= link_to user.followers.count, followers_user_path(user) %>
+        </th>
       </tr>
     </tbody>
   </table>
   <div class="row">
-    <a href="/users/<%= user.id %>/edit", class="fas fa-user-cog btn  btn-block btn-outline-secondary"></a>
+    <% if user == current_user %>
+      <a href="/users/<%= user.id %>/edit", class="fas fa-user-cog btn  btn-block btn-outline-secondary"></a>
+    <% elsif user.is_followed_by?(current_user) %>
+      <%= link_to 'Unfollow', user_relationships_path(user), method: :delete, class: "btn btn-outline-danger btn-block" %>
+    <% else %>
+      <%= link_to 'Follow', user_relationships_path(user), method: :post, class: "btn btn-outline-primary btn-block" %>
+    <% end %>
+
+
   </div>
