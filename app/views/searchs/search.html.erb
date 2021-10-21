@@ -1,0 +1,16 @@
+<div class="container">
+ <div class="row">
+  <div class="col-md-10">
+   <% if @model == 'user' %>
+     <h2>Users serach for "<%= @content %>"</h2>
+     <%= render 'users_index', users: @records %>
+   <% else @model == 'book' %>
+     <h2>Books serach for "<%= @content %>"</h2>
+     <%= render 'books_index', books: @records %>
+   <% end %>
+  </div>
+ </div>
+</div>
+
+
+

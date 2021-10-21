@@ -1,0 +1,28 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Profile-image</th>
+      <th></th>
+      <th>Name</th>
+      <th></th>
+      <th>Introduction</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% users.each do |user| %>
+    <tr>
+      <td>
+        <%= link_to users_path(user) do %>
+          <%= attachment_image_tag user, :profile_image, :fill, 40, 40, fallback: "no_image.jpg", size: "40x40"%>
+        <% end %>
+      </td>
+      <td></td>
+      <td class="user_name"><%= user.name %></td>
+      <td></td>
+      <td class="user_introduction"><%= user.introduction %></td>
+      <td></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
