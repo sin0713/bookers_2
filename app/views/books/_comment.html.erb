@@ -1,19 +1,25 @@
 <% book_comments.each do |book_comment| %>
-  <div class="col-md-2">
-    <%= attachment_image_tag book_comment.user, :profile_image, :fill, 45, 45, fallback: "no_image.jpg", size:"45x45" %>
-    <p>
-      <%= link_to user_path(book_comment.user.id) do %>
-        <%= book_comment.user.name %>
-      <% end %>
-    </p>
-  </div>
-  <div class="col-md-5">
-    <%= book_comment.comment %>
-  </div>
-  <div class="col-md-2 offset-md-2">
-    <% if current_user == book_comment.user %>
-      <%= link_to "destroy", book_book_comment_path(book, book_comment), method: :delete, class:"btn btn-danger btn-sm" %>
-    <% end %>
-  </div>
+  <table class="table">
+    <tbody>
+      <tr>
+        <td>
+          <%= attachment_image_tag book_comment.user, :profile_image, :fill, 45, 45, fallback: "no_image.jpg", size:"45x45" %>
+          <p class="m-0">
+            <%= link_to user_path(book_comment.user.id) do %>
+              <%= book_comment.user.name %>
+            <% end %>
+          </p>
+        </td>
+        <td colspan="3"><%= book_comment.comment %></td>
+        <td></td>
+        <td></td>
+        <td>
+          <% if current_user == book_comment.user %>
+            <%= link_to "destroy", book_book_comment_path(book_comment.book_id, book_comment), method: :delete, remote: true, class:"btn btn-danger btn-sm" %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 <% end %>
 
