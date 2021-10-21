@@ -1,36 +1,19 @@
-<div class="comment-wrapper">
-  <div class="container">
-    <h4 class="border-bottom pt-2">Comment</h4>
-    <% book_comments.each do |book_comment| %>
-    <div class="row no-gutter">
-
-      <div class="col-md-2">
-        <%= attachment_image_tag book_comment.user, :profile_image, :fill, 45, 45, fallback: "no_image.jpg", size:"45x45" %>
-        <p>
-          <%= link_to user_path(book_comment.user.id) do %>
-            <%= book_comment.user.name %>
-          <% end %>
-        </p>
-      </div>
-      <div class="col-md-5">
-        <%= book_comment.comment %>
-      </div>
-      <div class="col-md-2 offset-md-2">
-        <% if current_user == book_comment.user %>
-          <%= link_to "destroy", book_book_comment_path(book, book_comment), method: :delete, class:"btn btn-danger btn-sm" %>
-        <% end %>
-      </div>
-    </div>
-    <% end %>
-    <div class="comment_form">
-      <%= form_with(model:[book, book_comment], local: true) do |f| %>
-        <%= f.text_area :comment, rows:"3", placeholder: "コメントはここに", class:"form-control mb-3" %>
-
-        <%= f.submit "送信", class:"btn btn-sm btn-info ml-auto d-block"%>
+<% book_comments.each do |book_comment| %>
+  <div class="col-md-2">
+    <%= attachment_image_tag book_comment.user, :profile_image, :fill, 45, 45, fallback: "no_image.jpg", size:"45x45" %>
+    <p>
+      <%= link_to user_path(book_comment.user.id) do %>
+        <%= book_comment.user.name %>
       <% end %>
-
-    </div>
-
+    </p>
   </div>
-</div>
+  <div class="col-md-5">
+    <%= book_comment.comment %>
+  </div>
+  <div class="col-md-2 offset-md-2">
+    <% if current_user == book_comment.user %>
+      <%= link_to "destroy", book_book_comment_path(book, book_comment), method: :delete, class:"btn btn-danger btn-sm" %>
+    <% end %>
+  </div>
+<% end %>
 

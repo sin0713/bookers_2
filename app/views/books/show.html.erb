@@ -44,7 +44,24 @@
          </tbody>
        </table>
        <%= render 'layouts/error', model: @book_comment %>
-       <%= render 'books/comment', book: @book, book_comment: @book_comment, book_comments: @book.book_comments %>
-     </div>
+       
+       <div class="comment-wrapper">
+        <div class="container">
+          <div class="row no-gutter">
+            <h4 class="border-bottom pt-2">Comment</h4>
+            
+            <%= render 'books/comment', book: @book, book_comment: @book_comment, book_comments: @book.book_comments %>
+            
+            <div class="comment_form">
+              <%= form_with(model:[book, book_comment], local: true) do |f| %>
+                <%= f.text_area :comment, rows:"3", placeholder: "コメントはここに", class:"form-control mb-3" %>
+        
+                <%= f.submit "送信", class:"btn btn-sm btn-info ml-auto d-block"%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+       </div>
+    </div>
   </div>
 </div>
