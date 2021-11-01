@@ -10,7 +10,6 @@ class BookCommentsController < ApplicationController
 
      if @book_comment.save
        flash[:notice] = "Comment has created successfully"
-
      else
        @new_book = Book.new
        @user = User.find(@book.user_id)
