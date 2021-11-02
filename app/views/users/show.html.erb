@@ -38,7 +38,45 @@
           </tbody>
         <% end %>
       </table>
+
+      <div class="books-count">
+        <h2>投稿数の前日比・前週比</h2>
+        <table id="day-count" class="table">
+          <thead>
+            <tr>
+              <th>今日の投稿数</th>
+              <th>昨日の投稿数</th>
+              <th>前日比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= @day_book.count %></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <table id="week-count">
+           <thead>
+            <tr>
+              <th>今週の投稿数</th>
+              <th>昨週の投稿数</th>
+              <th>前週比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
+
 
   </div>
 </div>

@@ -2,10 +2,13 @@ class UsersController < ApplicationController
 
 
   def show
+    @day_book = @books.created_today
+    
     @user = User.find(params[:id])
     @books = Book.where(user_id: @user.id) #もしくは @books = @user.books なぜならテーブル同士アソシエーションで関連付けが行われているか
-
     @book = Book.new
+    
+    
   end
 
   def edit

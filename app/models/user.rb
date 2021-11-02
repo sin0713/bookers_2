@@ -17,9 +17,6 @@ class User < ApplicationRecord
     reverse_of_relationships.find_by(follow_id: user.id).present?
   end
   
-  
-  
-  
   attachment :profile_image
 
   validates :name, uniqueness: true, length: { in: 2..20 }
