@@ -51,8 +51,8 @@
           </thead>
           <tbody>
             <tr>
-              <td><%= @today_books.count %></td>
-              <td><%= @yesterday_books.count%></td>
+              <td><%= @books.created_today.count %></td>
+              <td><%= @books.created_yesterday.count%></td>
               <td><%= @day_before_ratio %></td>
             </tr>
           </tbody>
@@ -67,8 +67,8 @@
           </thead>
           <tbody>
             <tr>
-              <td><%= @this_week_books.count %></td>
-              <td><%= @last_week_books.count %></td>
+              <td><%= @books.created_this_week.count %></td>
+              <td><%= @books.created_last_week.count %></td>
               <td><%= @week_before_ratio %></td>
             </tr>
           </tbody>
