@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     @book = Book.new
 
     begin
-      @day_before_ratio = (@books.created_today.count / @bookscreated_yesterday.count) * 100
+      @day_before_ratio = (@books.created_today.count / @books.created_days_ago(1).count) * 100
     rescue
       @day_before_ratio = "--%"
     end

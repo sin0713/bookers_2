@@ -7,9 +7,9 @@ class Book < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   scope :created_today, -> { where(created_at: Time.zone.now.all_day) }
-  scope :created_yesterday, -> { where(created_at: 1.day.ago.all_day) }
-  scope :created_this_week, -> { where(created_at: Time.zone.now.all_week) }
-  scope :created_last_week, -> { where(created_at: 1.week.ago.all_week) }
+  scope :created_days_ago, -> (num) { where(created_at: Date.today.days_ago(num).all_day)}
+  scope :created_this_week, -> { where(created_at: Date.today..Date.today.days_ago(6)) }
+  scope :created_last_week, -> { where(created_at: 1.week.ago..Date.today.days_ago(13)) }
 
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
