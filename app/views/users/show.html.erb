@@ -40,8 +40,8 @@
       </table>
 
       <div class="books-count">
-        <h2>投稿数の前日比・前週比</h2>
-        <table id="day-count" class="table">
+        <h3>投稿数の前日比・前週比</h3>
+        <table id="day-count" class="table table-bordered">
           <thead>
             <tr>
               <th>今日の投稿数</th>
@@ -51,13 +51,13 @@
           </thead>
           <tbody>
             <tr>
-              <td><%= @day_book.count %></td>
-              <td></td>
-              <td></td>
+              <td><%= @today_books.count %></td>
+              <td><%= @yesterday_books.count%></td>
+              <td><%= @day_before_ratio %></td>
             </tr>
           </tbody>
         </table>
-        <table id="week-count">
+        <table class="table table-bordered" id="week-count">
            <thead>
             <tr>
               <th>今週の投稿数</th>
@@ -67,9 +67,9 @@
           </thead>
           <tbody>
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td><%= @this_week_books.count %></td>
+              <td><%= @last_week_books.count %></td>
+              <td><%= @week_before_ratio %></td>
             </tr>
           </tbody>
         </table>
