@@ -55,20 +55,54 @@
           </thead>
           <tbody>
             <tr>
-              <td><%= @books.%></td>
-              <td><%= %></td>
-              <td><%= %></td>
-              <td><%= %></td>
-              <td><%= %></td>
-              <td><%= %></td>
-              <td><%= %></td>
+              <td id="6days-ago"><%= @books.get_created_days_ago(6).count %></td>
+              <td ><%= @books.get_created_days_ago(5).count %></td>
+              <td><%= @books.get_created_days_ago(4).count %></td>
+              <td><%= @books.get_created_days_ago(3).count %></td>
+              <td><%= @books.get_created_days_ago(2).count %></td>
+              <td><%= @books.created_day_ago.count %></td>
+              <td><%= @books.created_today.count %></td>
             </tr>
           </tbody>
         </table>
 
       </div>
+      <div class="w-100 mx-auto-0 ">
+        <canvas id="mychart" class=""></canvas>
+      </div>
+      <script>
+        $(document).on('turbolinks:load', function() {
+          var ctx = document.getElementById('mychart');
+          var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '昨日', '今日'],
+              datasets: [{
+                label: '投稿数',
+                data: [
+                  <%= @books.get_created_days_ago(6).count %>,
+                  <%= @books.get_created_days_ago(5).count %>,
+                  <%= @books.get_created_days_ago(4).count %>,
+                  <%= @books.get_created_days_ago(3).count %>,
+                  <%= @books.get_created_days_ago(2).count %>,
+                  <%= @books.created_day_ago.count %>,
+                  <%= @books.created_today.count %>
+                  ],
+                borderColor: 'rgba(0,0,255,1)',
+              }],
+            },
+            options: {
+              y: {
+                min: 0,
+                max: 15,
+              },
+            },
+          });
+        });
 
-      <div class="">
+      </script>
+
+      <div class="book-ratio mt-3">
         <h3>投稿数の前日比・前週比</h3>
         <table id="day-count" class="table table-bordered">
           <thead>
@@ -81,7 +115,7 @@
           <tbody>
             <tr>
               <td><%= @books.created_today.count %></td>
-              <td><%= @books.created_days_ago(1).count%></td>
+              <td><%= @books.created_day_ago.count%></td>
               <td><%= @day_before_ratio %></td>
             </tr>
           </tbody>

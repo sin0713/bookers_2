@@ -1,5 +1,7 @@
 {
   "name": "bookers",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "chart.js": "^3.6.0"
+  }
 }
