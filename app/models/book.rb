@@ -15,6 +15,16 @@ class Book < ApplicationRecord
     self.where(created_at: Date.today.days_ago(num).all_day)
   end
 
+  def self.get_before_ratio(created_at_when_A, created_at_when_B)
+    before_ratio = (created_at_when_A.count / created_at_when_B.count.to_f) * 100
+    begin
+      return before_ratio.round
+    rescue
+      before_ratio = "--"
+    end
+  end
+
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end

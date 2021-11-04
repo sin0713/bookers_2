@@ -1,0 +1,140 @@
+<h2 class="mb-3" >Books</h2>
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <% books.each do |book| %>
+          <tbody>
+            <tr>
+              <td>
+                <%= link_to user_path(book.user_id) do %>
+                  <%= attachment_image_tag book.user, :profile_image, :fill, 30, 30, fallback: "no_image.jpg", size: "40x40" %>
+                <% end %>
+              </td>
+              <td class="text-dark">
+                <%= link_to book_path(book) do %>
+                  <%= book.title%>
+                <% end %>
+              </td>
+              <td><%= book.body %></td>
+              <td>
+                コメント数：<%= book.book_comments.count%>
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+
+      <div class="7days-books">
+        <h3>7日間分の投稿数</h3>
+        <table id="day-count" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>6日前</th>
+              <th>5日前</th>
+              <th>4日前</th>
+              <th>3日前</th>
+              <th>2日前</th>
+              <th>1日前</th>
+              <th>本日</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= books.get_created_days_ago(6).count %></td>
+              <td><%= books.get_created_days_ago(5).count %></td>
+              <td><%= books.get_created_days_ago(4).count %></td>
+              <td><%= books.get_created_days_ago(3).count %></td>
+              <td><%= books.get_created_days_ago(2).count %></td>
+              <td><%= books.created_day_ago.count %></td>
+              <td><%= books.created_today.count %></td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="my-4">
+        <canvas id="mychart"></canvas>
+      </div>
+      <script>
+        $(document).on('turbolinks:load', function() {
+          var ctx = document.getElementById('mychart');
+          var myChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+              labels: ['6日前', '5日前', '4日前', '3日前', '2日前', '昨日', '今日'],
+              datasets: [{
+                label: '投稿数',
+                data: [
+                    <%= books.get_created_days_ago(6).count %>,
+                    <%= books.get_created_days_ago(5).count %>,
+                    <%= books.get_created_days_ago(4).count %>,
+                    <%= books.get_created_days_ago(3).count %>,
+                    <%= books.get_created_days_ago(2).count %>,
+                    <%= books.created_day_ago.count %>,
+                    <%= books.created_today.count %>
+                  ],
+                borderColor: 'rgba(0,0,255,1)',
+                backgroundColor: "rgba(0,0,0,0)"
+              }],
+            },
+            options: {
+              title: {
+                display: true,
+                text: '7日間の投稿数の比較'
+              },
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    suggestedMax: 15,
+                    suggestedMin: 0,
+                    stepSize: 2,
+                  }
+                }]
+              },
+            }
+          });
+        });
+      </script>
+
+      <div class="book-ratio mt-3">
+        <h3>投稿数の前日比・前週比</h3>
+        <table id="day-count" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>今日の投稿数</th>
+              <th>昨日の投稿数</th>
+              <th>前日比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= books.created_today.count %></td>
+              <td><%= books.created_day_ago.count%></td>
+              <td><%= books.get_before_ratio(books.created_today, books.created_day_ago) %>%</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table table-bordered" id="week-count">
+           <thead>
+            <tr>
+              <th>今週の投稿数</th>
+              <th>昨週の投稿数</th>
+              <th>前週比</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= books.created_this_week.count %></td>
+              <td><%= books.created_last_week.count %></td>
+              <td><%= books.get_before_ratio(books.created_this_week, books.created_last_week) %>%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>

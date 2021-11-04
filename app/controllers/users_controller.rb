@@ -5,18 +5,6 @@ class UsersController < ApplicationController
   def show
     @books = Book.where(user_id: @user.id) #もしくは @books = @user.books なぜならテーブル同士アソシエーションで関連付けが行われているか
     @book = Book.new
-
-    begin
-      @day_before_ratio = (@books.created_today.count / @books.created_day_ago.count) * 100
-    rescue
-      @day_before_ratio = "--%"
-    end
-
-    begin
-      @week_before_ratio = (@books.created_this_week.count / @books.created_last_week.count) * 100
-    rescue
-      @week_before_ratio = "--%"
-    end
   end
 
   def edit
