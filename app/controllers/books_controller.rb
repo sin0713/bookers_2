@@ -1,9 +1,10 @@
 class BooksController < ApplicationController
+  include Typeable
+
+  before_action :set_new_book, only: [:index, :show]
 
   def index
     @books = Book.all
-    @book = Book.new
-    
   end
 
   def create
@@ -20,12 +21,10 @@ class BooksController < ApplicationController
   end
 
   def show
-    @new_book = Book.new
-    @book = Book.find(params[:id])
-
-    @user = User.find(@book.user_id)
+    @show_book = Book.find(params[:id])
+    @user = User.find(@show_book.user_id)
     @book_comment = BookComment.new
-    @book_comments = @book.book_comments
+    @book_comments = @show_book.book_comments
   end
 
   def edit

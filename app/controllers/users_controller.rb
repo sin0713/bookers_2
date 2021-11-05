@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-
+  include Typeable
   before_action :set_user, except: [:index]
+  before_action :set_new_book, only: [:show, :index]
 
   def show
     @books = Book.where(user_id: @user.id) #もしくは @books = @user.books なぜならテーブル同士アソシエーションで関連付けが行われているか
-    @book = Book.new
   end
 
   def edit
@@ -26,7 +26,6 @@ class UsersController < ApplicationController
 
   def index
     @users = User.all
-    @book = Book.new
   end
 
   def followings
