@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     resource :relationships, only: [:create, :destroy]
     get :followings, on: :member
     get :followers, on: :member
+    get "search", to: "users#search"
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

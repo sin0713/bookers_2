@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   include Typeable
-  before_action :set_user, except: [:index]
-  before_action :set_new_book, only: [:show, :index]
+  before_action :set_user, except: [:index, :search]
+  before_action :set_new_book, only: [:show, :index, :search]
 
   def show
     @books = Book.where(user_id: @user.id) #もしくは @books = @user.books なぜならテーブル同士アソシエーションで関連付けが行われているか
@@ -34,6 +34,18 @@ class UsersController < ApplicationController
 
   def followers
     @users = @user.followers
+  end
+
+  def search
+    @user = User.find(params[:user_id])
+    @books = @user.books
+
+    if params[:created_at] == ""
+      @search_book = "日付を選択してください"
+    else
+      create_at = params[:created_at]
+      @search_book = @books.where(['created_at LIKE ?', "%#{create_at}%"]).count
+    end
   end
 
 
