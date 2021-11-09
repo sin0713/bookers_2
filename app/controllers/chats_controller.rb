@@ -20,7 +20,7 @@ class ChatsController < ApplicationController
   def create
     @chat = current_user.chats.new(chat_params)
     @chat.save
-    redirect_to request.referer
+    @chats = Chat.where(room_id: @chat.room_id)
   end
 
   private

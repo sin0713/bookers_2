@@ -1,0 +1,16 @@
+  <% if chats.present? %>
+    <% chats.each do |c| %>
+      <% if c.user_id == current_user.id%>
+        <div class="text-right text-success">
+          <%= link_to c.user.name, user_path(current_user) %>
+          <p><%= c.message %></p>
+        </div>
+      <% else %>
+        <div class="text-left text-success">
+          <%= link_to c.user.name, user_path(c.user) %>
+          <p><%= c.message %></p>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+  
