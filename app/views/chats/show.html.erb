@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <h3>talk</h3>
+        <% if @chats.present? %>
+          <% @chats.each do |c| %>
+              <div class="d-flex justify-content-between">
+                <div><%= link_to c.user.name, user_path(@user) %></div>
+                <div>
+                  <p class="m-0"><%= c.message %></p>
+                  <span class="d-block"><%= c.created_at.strftime("%H:%M")%></span>
+                </div>
+              </div>
+              <hr>
+          <% end %>
+        <% end %>
+        <hr>
+        <p>新しいメッセージを作成</p>
+        <%= form_with model: @chat, method: :post, local: true do |f| %>
+          <%= f.text_field :message, class:'form-control' %>
+          <%= f.hidden_field :room_id %>
+          <%= f.submit '送信' %>
+        <% end %>
+      </div>
+    </div>
+</div>
+
+
