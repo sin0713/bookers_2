@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :chats, dependent: :destroy
   has_many :user_rooms, dependent: :destroy
+  has_many :group_users
+  has_many :groups, through: :group_users
+  
 
 
   has_many :relationships, foreign_key: :follow_id
