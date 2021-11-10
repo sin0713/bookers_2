@@ -7,6 +7,8 @@ class Book < ApplicationRecord
   validates :title, presence: true
   validates :body, presence: true, length: { maximum: 200 }
 
+  is_impressionable counter_cache: true
+
   scope :created_today, -> { where(created_at: Time.zone.now.all_day) }
   scope :created_day_ago, -> { where(created_at:  1.day.ago.all_day) }
   scope :created_this_week, -> { where(created_at: Date.today..Date.today.days_ago(6)) }

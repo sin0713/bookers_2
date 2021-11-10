@@ -32,6 +32,7 @@
                <%= render 'favorites/favorite-btn', book: @show_book %>
              </td>
              <td class="comments-count">コメント数：<%= @show_book.book_comments.count %></td>
+             <td>閲覧数： <%= @show_book.impressions_count %></td>
              <% if current_user.id == @show_book.user_id %>
                <td>
                  <%= link_to "Edit", edit_book_path(@show_book), class:"btn btn-success btn-sm" %>

@@ -1,14 +1,14 @@
 class BooksController < ApplicationController
   include Typeable
-
+  impressionist :action => [:show]
   before_action :set_new_book, only: [:index, :show]
 
   def index
     to  = Time.current.at_end_of_day
     from  = (to - 6.day).at_beginning_of_day
     @books = Book.includes(:favorited_users).
-      sort {|a,b| 
-        b.favorited_users.includes(:favorites).where(created_at: from...to).size <=> 
+      sort {|a,b|
+        b.favorited_users.includes(:favorites).where(created_at: from...to).size <=>
         a.favorited_users.includes(:favorites).where(created_at: from...to).size
       }
   end
@@ -31,6 +31,7 @@ class BooksController < ApplicationController
     @user = User.find(@show_book.user_id)
     @book_comment = BookComment.new
     @book_comments = @show_book.book_comments
+    impressionist(@show_book, nil, unique: [:ip_address])
   end
 
   def edit
