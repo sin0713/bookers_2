@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     get "search", to: "users#search"
   end
   resources :chats, only: [:show, :create]
-  resources :groups, only: [:new, :create, :edit, :update, :index, :show]
+  resources :groups, only: [:new, :create, :edit, :update, :index, :show] do
+    resource :group_users, only: [:create, :destroy]
+  end 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

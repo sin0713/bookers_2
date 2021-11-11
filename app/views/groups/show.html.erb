@@ -1,0 +1,35 @@
+<div class="container">
+  <h2><%= @group.name %>へようこそ！</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>name</th>
+        <th>introduction</th>
+        <th>メンバー</th>
+        <th>メンバー数</th>
+        <th></th>
+      </tr>
+    </thead>
+           <td><%= attachment_image_tag @group, :image, :fill, 45, 45, fallback: "no-group-image.jpg", size:"60x60" %></td>
+           <td><%= @group.name %></td>
+           <td><%= @group.introduction %></td>
+           <td>
+             <% @group.users.each do |user| %>
+               <p><%= user.name %></p>
+              <% end %>
+           </td>
+           <td><%= @group.users.count %></td>
+           <td>
+             <% unless @group.owner_id == current_user.id %>
+               <% if @group.users.where(id: current_user.id).present? %>
+                 <% link_to 'leave this group', group_group_users_path(@group), method: :delete %>
+               <% else %>
+                 <%= link_to 'Join this group', group_group_users_path(@group), method: :post %>
+               <% end %>
+             <% end %>
+           </td>
+         </tr>
+    　</tbody>
+  </table>
+</div>
