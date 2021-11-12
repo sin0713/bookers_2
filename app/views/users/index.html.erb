@@ -6,10 +6,10 @@
        <%= render "books/new_book", book: @new_book %>
      </div>
     <div class="col-md-8 offset-md-1 mt-4">
-      <h2 class="mt-4 mb-2">Users</h2>
-      <%= link_to 'グループを作成する', new_group_path %>
-      <%= link_to 'グループ一覧', groups_path%>
-        <table class="table">
+      <h2 class="mb-3">Users</h2>
+      <%= link_to 'グループを作成する', new_group_path, class:"btn btn-sm btn-primary mr-3" %>
+      <%= link_to 'グループ一覧', groups_path, class:"btn btn-sm btn-secondary "%>
+        <table class="table mt-2">
           <thead>
             <tr>
               <th>image</th>
